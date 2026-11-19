@@ -1,4 +1,4 @@
-# Laboratório — Captura de tráfego em nuvem com Packet Mirroring (Google Cloud)
+# Laboratório - Captura de tráfego em nuvem com Packet Mirroring (Google Cloud)
 
 Laboratório prático de **espelhamento de pacotes (Packet Mirroring)** no Google Cloud Platform: o tráfego de uma VM de origem (`sourcevm`) é copiado, via um balanceador de carga interno UDP, para uma VM coletora (`targetvm`), onde é capturado com `tcpdump` e analisado no Wireshark.
 
@@ -118,7 +118,7 @@ O coletor de Packet Mirroring precisa ser um **balanceador de carga de rede de p
 | Etapa | Escolha | Tela |
 | --- | --- | --- |
 | Tipo | Balanceador de carga de rede | ![](images/04-lb-tipo-rede.png) |
-| Modo | Passagem (passthrough) — preserva o IP de origem | ![](images/05-lb-passthrough.png) |
+| Modo | Passagem (passthrough) - preserva o IP de origem | ![](images/05-lb-passthrough.png) |
 | Exposição | Interno | ![](images/06-lb-interno.png) |
 
 **Configuração geral**
@@ -203,7 +203,7 @@ sudo tcpdump -i any icmp                       # visualizar em tempo real
 
 ![tcpdump na targetvm recebendo o tráfego espelhado](images/11-teste-tcpdump-targetvm.png)
 
-Os pacotes de *echo request* e *echo reply* trocados entre `sourcevm` e `dns.google` (8.8.8.8) aparecem na interface `ens4` da `targetvm`, embora a `targetvm` não participe dessa comunicação — isso confirma que o espelhamento funcionou.
+Os pacotes de *echo request* e *echo reply* trocados entre `sourcevm` e `dns.google` (8.8.8.8) aparecem na interface `ens4` da `targetvm`, embora a `targetvm` não participe dessa comunicação - isso confirma que o espelhamento funcionou.
 
 ## 8. Análise no Wireshark
 
@@ -219,7 +219,7 @@ O arquivo [`captures/captura-gcp.pcap`](captures/captura-gcp.pcap) pode ser aber
 
 Observações:
 
-- Os pacotes chegam ao coletor **sem encapsulamento** e com os IPs originais preservados — característica do Packet Mirroring do GCP, ao contrário de soluções que usam túnel (VXLAN/GRE).
+- Os pacotes chegam ao coletor **sem encapsulamento** e com os IPs originais preservados - característica do Packet Mirroring do GCP, ao contrário de soluções que usam túnel (VXLAN/GRE).
 - Todos os pacotes aparecem como `In` na `targetvm`, inclusive as requisições que saíram da `sourcevm`: o coletor recebe as cópias dos dois sentidos do fluxo.
 
 ## Conclusão
